@@ -1,37 +1,36 @@
-# 🌐 Topología Lógica — Trabajo final de grado ASIR
+## Topología Lógica
 
 Red de un recinto de exposiciones con **2 pabellones**, simulada en **Cisco Packet Tracer**.
 Este documento explica, de forma sencilla, cómo está organizada la red y cómo se ha configurado.
 
 ---
 
-## 📌 ¿Qué se ha hecho?
+## ¿Qué se ha hecho?
 
 Se ha montado una red **segmentada en VLANs**, con un router que permite (o no) que las VLANs se hablen entre sí. La idea es simple: **cada tipo de usuario tiene su propia red**, aunque compartan el mismo switch físico.
 
-- ✅ 5 VLANs separadas por tipo de usuario
-- ✅ 4 switches (1 core + 3 de acceso)
-- ✅ 1 router con *Router-on-a-Stick* para comunicar las VLANs
-- ✅ PCs de prueba en cada VLAN para verificar con `ping`
+- 5 VLANs separadas por tipo de usuario
+- 4 switches (1 core + 3 de acceso)
+- 1 router con *Router-on-a-Stick* para comunicar las VLANs
+- PCs de prueba en cada VLAN para verificar con `ping`
 
 ---
 
-## 🗺️ Estructura de la red
+## Estructura de la red
 
 La red tiene **3 zonas físicas**, cada una con su switch de acceso:
 
 | Zona | Qué hay | Switch |
 |------|---------|--------|
-| 🏢 Pabellón 1 — Planta baja | Stands, cafetera, sala de presentaciones 3, demo, networking | `SW-PAB1` |
-| 🏛️ Pabellón 1 — Oficina (planta superior) | Sala de reuniones, escritorios, zona directivos | `SW-OFICINA` |
-| 🏢 Pabellón 2 | Stands, salas de presentaciones 1 y 2, cafetera, networking, entrada principal | `SW-PAB2` |
+| Pabellón 1 — Planta baja | Stands, cafetera, sala de presentaciones 3, demo, networking | `SW-PAB1` |
+| Pabellón 1 — Oficina (planta superior) | Sala de reuniones, escritorios, zona directivos | `SW-OFICINA` |
+| Pabellón 2 | Stands, salas de presentaciones 1 y 2, cafetera, networking, entrada principal | `SW-PAB2` |
 
 ### Jerarquía de conexiones
 
 <img width="637" height="646" alt="image" src="https://github.com/user-attachments/assets/f8280307-2acd-42ab-8f9b-0bcc80aac73a" />
 
 
-## 🧩 VLANs
 
 Las VLANs separan el tráfico por tipo de usuario. **Por defecto no pueden comunicarse entre sí**; solo lo hacen a través del router.
 
@@ -53,7 +52,7 @@ Las VLANs separan el tráfico por tipo de usuario. **Por defecto no pueden comun
 
 ---
 
-## 💻 Direccionamiento de los PCs
+## Direccionamiento de los PCs
 
 | PC | VLAN | IP | Máscara | Gateway |
 |----|:----:|----|---------|---------|
@@ -69,7 +68,7 @@ Las VLANs separan el tráfico por tipo de usuario. **Por defecto no pueden comun
 
 ---
 
-## 🔧 ¿Cómo funciona? (resumen simple)
+## ¿Cómo funciona? (resumen simple)
 
 1. **VLANs:** se crean las 5 VLANs en los 4 switches.
 2. **Puertos *access*:** cada puerto donde se conecta un PC se asigna a su VLAN.
@@ -87,7 +86,7 @@ Las VLANs separan el tráfico por tipo de usuario. **Por defecto no pueden comun
 
 ---
 
-## ⌨️ Comandos principales
+## Comandos principales
 
 <details>
 <summary><b>Crear VLANs (en los 4 switches)</b></summary>
@@ -159,18 +158,18 @@ interface GigabitEthernet 0/0.50
 
 ---
 
-## ✅ Verificación
+## Verificación
 
 Desde `PC-Stand-1` (`192.168.10.10`) → *Desktop → Command Prompt*:
 
 | Prueba | Comando | Resultado esperado |
 |--------|---------|--------------------|
-| Gateway de su VLAN | `ping 192.168.10.1` | ✅ Responde |
-| Misma VLAN | `ping 192.168.10.11` | ✅ Responde |
-| Otra VLAN (Oficina) | `ping 192.168.20.10` | ✅ Responde vía router |
-| Otra VLAN (Presentaciones) | `ping 192.168.30.10` | ✅ Responde vía router |
+| Gateway de su VLAN | `ping 192.168.10.1` | Responde |
+| Misma VLAN | `ping 192.168.10.11` | Responde |
+| Otra VLAN (Oficina) | `ping 192.168.20.10` | Responde vía router |
+| Otra VLAN (Presentaciones) | `ping 192.168.30.10` | Responde vía router |
 
-### 🛠️ Si algo falla
+### Si algo falla
 
 | Síntoma | Causa probable | Qué revisar |
 |---------|----------------|-------------|
@@ -180,13 +179,13 @@ Desde `PC-Stand-1` (`192.168.10.10`) → *Desktop → Command Prompt*:
 
 ---
 
-## 📸 Capturas
+## Capturas
 
 <img width="1055" height="601" alt="image" src="https://github.com/user-attachments/assets/d41927f3-de89-45eb-895c-509a6d3b8ab1" />
 <img width="835" height="582" alt="image" src="https://github.com/user-attachments/assets/66cd05d7-c06c-4014-91b3-8755e92aee50" />
 <img width="1260" height="598" alt="image" src="https://github.com/user-attachments/assets/737c10b2-c22b-454f-9ba4-ece38cc8f1ef" />
 
-## 📸 Pabellones:
+## Pabellones:
 Planos de las Plantas:
 <img width="941" height="627" alt="image" src="https://github.com/user-attachments/assets/659131f1-1349-42ee-9f27-2125232979c3" />
 <img width="929" height="423" alt="image" src="https://github.com/user-attachments/assets/37b11fc1-1a75-486b-b1d7-c68152facdc6" />
